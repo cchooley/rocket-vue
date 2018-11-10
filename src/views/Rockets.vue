@@ -11,9 +11,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import NewRocketForm from '@/components/NewRocketForm'
 import RocketList from '@/components/RocketList'
-import API from '@/lib/API'
 
 export default {
     name: 'rockets',
@@ -21,21 +22,11 @@ export default {
         NewRocketForm,
         RocketList,
     },
-    data: () => ({
-        rockets: [],
-    }),
+    computed: mapGetters(['rockets']),
     async mounted() {
-        this.rockets = await API.getRockets()
+        this.$store.dispatch('getRockets');
     },
-    methods: {
-        addRocket(rocket) {
-            this.rockets.push(rocket) // send down to form component
-        },
-        removeRocket(rocket) {
-            const index = this.rockets.indexOf(rocket)
-            this.rockets.splice(index, 1)
-        }
-    },
+
 }
 </script>
 

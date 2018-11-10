@@ -43,9 +43,9 @@ export default {
     }),
     methods: {
         onAddRocket() {
-            this.addRocket(this.rocket)
-            this.rocket = getEmptyRocket()
-            this.showForm = false
+            this.$store.commit('addRocket', this.rocket);
+            this.rocket = getEmptyRocket();
+            this.showForm = false;
         }
     }
 }
